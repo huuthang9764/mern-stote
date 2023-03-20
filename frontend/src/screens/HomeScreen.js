@@ -43,20 +43,26 @@ function HomeScreen() {
     <div>
       <h1>Featured Products</h1>
       <div className="products">
-        {products.map((product) => (
-          <div className="product" key={product.slug}>
-            <Link to={`/product/${product.slug}`}>
-              <img src={product.image} alt={product.name} />
-            </Link>
-            <div className="product-info">
-              <p>{product.name}</p>
-              <p>
-                <strong>${product.price}</strong>
-              </p>
-              <button>Add To Cart</button>
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+          products.map((product) => (
+            <div className="product" key={product.slug}>
+              <Link to={`/product/${product.slug}`}>
+                <img src={product.image} alt={product.name} />
+              </Link>
+              <div className="product-info">
+                <p>{product.name}</p>
+                <p>
+                  <strong>${product.price}</strong>
+                </p>
+                <button>Add To Cart</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
